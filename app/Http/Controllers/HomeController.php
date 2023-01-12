@@ -25,7 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('create');
+        // ここでメモを取得
+        $memos = Memo::select('memos.*')
+            ->where('user_id', '=', Auth::id() )
+            ->whereNull('deleted_at')
+            ->orderBy('updated_at', 'DESC') //ASCが小さい順、DESCが大きい順
+            ->get();
+            // dd($memos);
+        return view('create', compact('memos'));
     }
 
     public function store(Request $request)
