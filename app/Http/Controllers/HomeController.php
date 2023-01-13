@@ -55,4 +55,22 @@ class HomeController extends Controller
 
         return view('edit', compact('memos', 'edit_memo'));
     }
+
+    public function update(Request $request)
+    {
+        $posts = $request->all();
+        // dd($posts);
+        Memo::where('id', $posts['memo_id'])->update(['content' => $posts['content'] ]);
+
+        return redirect(route('home'));
+    }
+
+    public function destroy(Request $request)
+    {
+        $posts = $request->all();
+        // dd($posts);
+        Memo::where('id', $posts['memo_id'])->update(['deleted_at' => date("Y-m-d H:i:s", time())]);
+
+        return redirect(route('home'));
+    }
 }
