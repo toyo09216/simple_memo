@@ -17,6 +17,9 @@
         <div class="mb-3">
             <textarea class="form-control" name="content" placeholder="ここにメモを入力" rows="3">{{ $edit_memo[0]['content'] }}</textarea>
         </div>
+        @error('content')
+            <div class="alert alert-danger">メモ内容を入力してください</div>
+        @enderror
         @foreach ($tags as $t)
             <div class="form-check form-check-inline mb-3">
                 {{-- 三項演算子を使う{{ 条件 ? trueだったら : falseだったら }} --}}

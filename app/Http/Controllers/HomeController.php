@@ -39,6 +39,7 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $posts = $request->all();
+        $request->validate(['content' => 'required']);
 
         DB::transaction(function() use($posts) {
             // メモIDをインサートして、取得
@@ -92,6 +93,7 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $posts = $request->all();
+        $request->validate(['content' => 'required']);
         
         // トランザクション開始
         DB::transaction(function() use($posts){
